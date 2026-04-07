@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source "$HOME/.claude/trail.conf"
+PLUGIN_DIR="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
 TRAIL_DIR="$HOME/trail"
 
 mkdir -p "$TRAIL_DIR"
