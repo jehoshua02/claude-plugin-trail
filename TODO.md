@@ -1,5 +1,0 @@
-- Discuss trail.conf and location
-- Template for README.md? No template for trailhead? Which way are we leaning?
-- README.md in trail plugin (installation, usage)
-- What platforms will these scripts work on? Mac? Windows? Linux?
-- README.md in caveman plugin
