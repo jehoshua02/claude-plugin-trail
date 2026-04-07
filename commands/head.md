@@ -11,13 +11,29 @@ Gather the following information from the user before doing anything else:
 
 Once you have all three, organize the context into a clean, concise paragraph or short bullet points suitable for a trailhead document.
 
-Then run:
+Then create the trailhead by running the following (substituting values inline — do not use shell variables):
 
+```bash
+mkdir -p ~/trail/<YYYY-MM-DD>-<slug>
 ```
-python3 "$(ls -d ~/.claude/plugins/cache/jehoshua02/trail/*/scripts/new.py | sort -V | tail -1)" \
-  "<topic-name>" \
-  --ticket "<ticket or 'none'>" \
-  --context "<organized context>"
+
+```bash
+cat > ~/trail/<YYYY-MM-DD>-<slug>/00-trailhead.md << 'EOF'
+# <topic-name>
+
+**Date:** <YYYY-MM-DD>
+**Ticket:** <ticket or 'none'>
+**Status:** active
+
+## Context
+<organized context>
+EOF
 ```
+
+```bash
+git -C ~/trail add . && git -C ~/trail commit -m "new: <YYYY-MM-DD>-<slug>"
+```
+
+Where `<slug>` is the topic name lowercased with spaces replaced by dashes and non-alphanumeric/dash characters removed.
 
 Print the path to the new topic folder when done.
