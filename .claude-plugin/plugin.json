@@ -1,0 +1,10 @@
+{
+  "name": "claude-plugin-trail",
+  "version": "1.0.0",
+  "description": "Trail — a working log for projects, investigations, and ephemeral work",
+  "author": {
+    "name": "jehoshua02"
+  },
+  "repository": "https://github.com/jehoshua02/claude-plugin-trail",
+  "license": "MIT"
+}
