@@ -8,7 +8,7 @@ Add the jehoshua02 marketplace and install the plugin using the `/plugin` comman
 
 ```
 /plugin add-marketplace jehoshua02
-/plugin install claude-plugin-trail
+/plugin install trail
 ```
 
 ## Commands
@@ -19,7 +19,7 @@ Initialize `~/trail` as a git repository.
 
 ### trail:head
 
-Create a new topic with a trailhead. Topics are created as dated folders:
+Start a new topic. Interactively collects topic name, ticket, and context, then creates a dated folder with a trailhead:
 
 ```
 ~/trail/2026-04-07-topic-name/
