@@ -1,8 +1,5 @@
 - Discuss trail.conf and location
-- What about trail:head instead of new?
 - Template for README.md? No template for trailhead? Which way are we leaning?
 - README.md in trail plugin (installation, usage)
 - What platforms will these scripts work on? Mac? Windows? Linux?
 - README.md in caveman plugin
-- /trail:new should be /trail:head right?
-- /trail:new didn't ask me for any info. Just copied the template and that is it.
