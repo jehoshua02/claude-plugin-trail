@@ -5,4 +5,4 @@ allowed-tools: Bash
 
 If `$ARGUMENTS` is empty, ask the user for a topic name before proceeding.
 
-Otherwise run: `bash "$(echo ~/.claude/plugins/cache/jehoshua02/claude-plugin-trail/*/scripts/new.sh)" "$ARGUMENTS"`
+Otherwise run: `bash "$(ls -d ~/.claude/plugins/cache/jehoshua02/claude-plugin-trail/*/scripts/new.sh | sort -V | tail -1)" "$ARGUMENTS"`
