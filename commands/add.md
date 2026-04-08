@@ -31,7 +31,7 @@ Then create the entry:
 cat > ~/trail/<topic-folder>/<NN>-<slug>.md << 'EOF'
 # <entry-title>
 
-**Date:** <YYYY-MM-DD>
+**Date:** <YYYY-MM-DD HH:MM>
 
 <organized content>
 EOF

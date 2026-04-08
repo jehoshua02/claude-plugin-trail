@@ -21,7 +21,7 @@ mkdir -p ~/trail/<YYYY-MM-DD>-<slug>
 cat > ~/trail/<YYYY-MM-DD>-<slug>/00-trailhead.md << 'EOF'
 # <topic-name>
 
-**Date:** <YYYY-MM-DD>
+**Date:** <YYYY-MM-DD HH:MM>
 **Ticket:** <ticket or 'none'>
 **Status:** active
 
