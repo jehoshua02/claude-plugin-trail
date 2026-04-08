@@ -35,3 +35,7 @@ Add a new entry to an existing topic. Interactively collects topic, entry title,
   00-trailhead.md
   01-entry-title.md
 ```
+
+### trail:resume
+
+Resume an existing topic. Reads all files in the topic folder and summarizes what has been done so far, then prompts to continue.
