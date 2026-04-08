@@ -14,9 +14,33 @@ allowed-tools: Bash
    cat ~/trail/<topic-folder>/*.md
    ```
 
-3. Output a TLDR — 3–5 bullet points max. Cover:
+3. Compose the TLDR — 3–5 bullet points max. Cover:
    - What the topic is about
    - What was tried or discovered
    - Current status or outcome
 
+   Each bullet that references a file must link to it (e.g. `[01-something.md](01-something.md)`).
    Be ruthlessly brief. No filler. Just the facts.
+
+4. Check if `~/trail/<topic-folder>/00-tldr.md` exists:
+   ```bash
+   ls ~/trail/<topic-folder>/00-tldr.md 2>/dev/null
+   ```
+
+   - **Does not exist** — create it:
+     ```bash
+     cat > ~/trail/<topic-folder>/00-tldr.md << 'EOF'
+     # TLDR
+
+     <bullets>
+     EOF
+     ```
+
+   - **Exists** — read it and check that every file in the folder is mentioned. If any file is missing, update the bullets to include it, then overwrite the file.
+
+5. Commit:
+   ```bash
+   git -C ~/trail add . && git -C ~/trail commit -m "tldr: <topic-folder>"
+   ```
+
+6. Print the TLDR to the user.
