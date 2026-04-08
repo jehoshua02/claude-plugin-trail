@@ -6,9 +6,9 @@ allowed-tools: Bash
 1. **Topic folder** — resolve in this order:
    1. Use `$ARGUMENTS` if provided
    2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head` in this session
-   3. Otherwise, list folders in `~/trail` and ask the user to pick one:
+   3. Otherwise, run the following to get the most recent folders, then use `AskUserQuestion` to present them as options (up to 4, label = folder name, description = blank). "Other" is added automatically for custom input.
       ```bash
-      ls ~/trail
+      ls ~/trail | grep -v README | grep -v "^archive" | tail -4
       ```
 
 2. Read all files in the topic folder:

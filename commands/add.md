@@ -8,9 +8,9 @@ Gather the following information from the user before doing anything else:
 1. **Topic folder** — resolve in this order:
    1. Use `$ARGUMENTS` if provided
    2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head` or `/trail:resume` in this session
-   3. Otherwise, list folders in `~/trail` and ask the user to pick one:
+   3. Otherwise, run the following to get the most recent folders, then use `AskUserQuestion` to present them as options (up to 4, label = folder name, description = blank). "Other" is added automatically for custom input.
       ```bash
-      ls ~/trail
+      ls ~/trail | grep -v README | grep -v "^archive" | tail -4
       ```
 2. **Entry title** — ask for a short title (will become the filename slug and heading)
 3. **Content** — ask the user to share notes, findings, links, anything. Accept free-form input.
