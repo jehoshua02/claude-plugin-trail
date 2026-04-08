@@ -25,3 +25,13 @@ Start a new topic. Interactively collects topic name, ticket, and context, then 
 ~/trail/2026-04-07-topic-name/
   00-trailhead.md
 ```
+
+### trail:add
+
+Add a new entry to an existing topic. Interactively collects topic, entry title, and content, then creates a new numbered file:
+
+```
+~/trail/2026-04-07-topic-name/
+  00-trailhead.md
+  01-entry-title.md
+```
