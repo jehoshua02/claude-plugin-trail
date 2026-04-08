@@ -5,10 +5,13 @@ allowed-tools: Bash
 
 Gather the following information from the user before doing anything else:
 
-1. **Topic folder** — use `$ARGUMENTS` if provided. Otherwise, list folders in `~/trail` and ask the user to pick one:
-   ```bash
-   ls ~/trail
-   ```
+1. **Topic folder** — resolve in this order:
+   1. Use `$ARGUMENTS` if provided
+   2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head` or `/trail:resume` in this session
+   3. Otherwise, list folders in `~/trail` and ask the user to pick one:
+      ```bash
+      ls ~/trail
+      ```
 2. **Entry title** — ask for a short title (will become the filename slug and heading)
 3. **Content** — ask the user to share notes, findings, links, anything. Accept free-form input.
 

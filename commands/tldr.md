@@ -3,10 +3,13 @@ description: Get a brief summary of an existing trail topic. Usage: /trail:tldr 
 allowed-tools: Bash
 ---
 
-1. **Topic folder** — use `$ARGUMENTS` if provided. Otherwise, list folders in `~/trail` and ask the user to pick one:
-   ```bash
-   ls ~/trail
-   ```
+1. **Topic folder** — resolve in this order:
+   1. Use `$ARGUMENTS` if provided
+   2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head`, `/trail:add`, or `/trail:resume` in this session
+   3. Otherwise, list folders in `~/trail` and ask the user to pick one:
+      ```bash
+      ls ~/trail
+      ```
 
 2. Read all files in the topic folder:
    ```bash

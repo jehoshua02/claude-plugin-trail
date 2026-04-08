@@ -3,10 +3,13 @@ description: Resume an existing trail topic. Usage: /trail:resume [topic-folder]
 allowed-tools: Bash
 ---
 
-1. **Topic folder** — use `$ARGUMENTS` if provided. Otherwise, list folders in `~/trail` and ask the user to pick one:
-   ```bash
-   ls ~/trail
-   ```
+1. **Topic folder** — resolve in this order:
+   1. Use `$ARGUMENTS` if provided
+   2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head` in this session
+   3. Otherwise, list folders in `~/trail` and ask the user to pick one:
+      ```bash
+      ls ~/trail
+      ```
 
 2. Read all files in the topic folder:
    ```bash
