@@ -40,6 +40,10 @@ Add a new entry to an existing topic. Interactively collects topic, entry title,
 
 Resume an existing topic. Reads all files in the topic folder and summarizes what has been done so far, then prompts to continue.
 
+### trail:daily
+
+Generate a daily summary of all trails touched today (active and archived). Formats output as Slack-friendly text and copies to clipboard via `pbcopy`.
+
 ### trail:tldr
 
 Get a brief summary of an existing topic. Outputs 3–5 bullet points covering what it was, what was found, and current status.
