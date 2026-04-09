@@ -36,9 +36,9 @@ Add a new entry to an existing topic. Interactively collects topic, entry title,
   01-entry-title.md
 ```
 
-### trail:resume
+### trail:select
 
-Resume an existing topic. Reads all files in the topic folder and summarizes what has been done so far, then prompts to continue.
+Select and resume an existing topic. Shows all active trail folders, reads all files in the chosen topic, and summarizes what has been done so far. Other commands (`add`, `tldr`, `archive`) automatically invoke `select` when no topic is specified.
 
 ### trail:daily
 

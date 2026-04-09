@@ -5,26 +5,35 @@ allowed-tools: Bash
 
 1. **Topic folder** — resolve in this order:
    1. Use `$ARGUMENTS` if provided
-   2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head`, `/trail:add`, or `/trail:resume` in this session
-   3. Otherwise, run the following to get the most recent folders, then use `AskUserQuestion` to present them as options (up to 4, label = folder name, description = blank). "Other" is added automatically for custom input.
-      ```bash
-      ls ~/trail | grep -v README | grep -v "^archive" | tail -4
-      ```
+   2. Otherwise, check conversation context for a topic folder set by a previous `/trail:head`, `/trail:add`, or `/trail:select` in this session
+   3. Otherwise, run `/trail:select` and use the selected topic folder
 
-2. Read all files in the topic folder:
+2. **Freshness check** — compare `00-tldr.md` modification time against the newest trail entry:
+   ```bash
+   tldr_mod=$(stat -f %m ~/trail/<topic-folder>/00-tldr.md 2>/dev/null || echo 0)
+   latest_entry=$(ls -t ~/trail/<topic-folder>/*.md | grep -v 00-tldr | grep -v 00-trailhead | head -1)
+   latest_mod=$(stat -f %m "$latest_entry" 2>/dev/null || echo 0)
+   echo "tldr=$tldr_mod latest=$latest_mod"
+   ```
+
+   If `00-tldr.md` exists AND `tldr_mod >= latest_mod` (fresh), read and print `00-tldr.md` — skip to step 8.
+
+   Otherwise (stale or missing), continue to step 3.
+
+3. Read all files in the topic folder:
    ```bash
    ls ~/trail/<topic-folder>/
    cat ~/trail/<topic-folder>/*.md
    ```
 
-3. Compose the TLDR using this fixed structure:
+4. Compose the TLDR using this fixed structure:
 
    - **What** — one-liner: what is this trail about
    - **Status** — one of: `active`, `blocked`, `waiting`, `done`
    - **Key Points** — 2–5 bullets covering findings, decisions, or outcomes. Each bullet that references a file must link to it (e.g. `[01-something.md](01-something.md)`). Be ruthlessly brief. No filler. Just the facts.
    - **Next Step** — the single next action to take (or "none" if done)
 
-4. **Score the trail on 6 priority factors (1–5)** — based on the trailhead, entries, and tldr bullets, assess:
+5. **Score the trail on 6 priority factors (1–5)** — based on the trailhead, entries, and tldr bullets, assess:
 
    **Numerator factors (higher = more priority):**
    - **Value (1–5):** What impact does this deliver?
@@ -68,7 +77,7 @@ allowed-tools: Bash
 
    For each factor, write a brief one-sentence justification for the score.
 
-5. Check if `~/trail/<topic-folder>/00-tldr.md` exists:
+6. Check if `~/trail/<topic-folder>/00-tldr.md` exists:
    ```bash
    ls ~/trail/<topic-folder>/00-tldr.md 2>/dev/null
    ```
@@ -106,9 +115,9 @@ allowed-tools: Bash
 
    - **Exists** — read it and check that every file in the folder is mentioned. If any file is missing, update the bullets to include it. Always re-score the priority factors based on current trail content, then overwrite the file.
 
-6. Commit:
+7. Commit:
    ```bash
    git -C ~/trail add <topic-folder>/00-tldr.md && git -C ~/trail commit -m "tldr: <topic-folder>"
    ```
 
-7. Print the TLDR to the user.
+8. Print the TLDR to the user.

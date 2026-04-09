@@ -9,14 +9,8 @@ allowed-tools: Bash, Agent
    ```
 
 2. **Process trails in parallel** — spawn one subagent per trail, all in a single message (parallel). Each subagent:
-   - **TLDR freshness check** — compare `00-tldr.md` modification time against the newest trail entry:
-     ```bash
-     tldr_mod=$(stat -f %m ~/trail/<topic>/00-tldr.md 2>/dev/null || echo 0)
-     latest_entry=$(ls -t ~/trail/<topic>/*.md | grep -v 00-tldr | grep -v 00-trailhead | head -1)
-     latest_mod=$(stat -f %m "$latest_entry" 2>/dev/null || echo 0)
-     ```
-   - If `00-tldr.md` does not exist OR `latest_mod > tldr_mod` (stale), **run `/trail:tldr <topic-folder>`** to regenerate it.
-   - Read the (now fresh) `00-tldr.md`
+   - Run `/trail:tldr <topic-folder>` to ensure the TLDR is fresh
+   - Read `~/trail/<topic-folder>/00-tldr.md`
    - Parse the `## Priority Factors` table for the 6 scores (Value, Blocking, Urgency, Momentum, Effort, Risk) and their reasoning
    - Return: topic folder name, all 6 scores with reasoning, and 2-3 sentence TLDR summary
 
