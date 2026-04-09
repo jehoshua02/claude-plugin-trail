@@ -47,3 +47,7 @@ Generate a daily summary of all trails touched today (active and archived). Form
 ### trail:tldr
 
 Get a brief summary of an existing topic. Outputs 3–5 bullet points covering what it was, what was found, and current status.
+
+### trail:prioritize
+
+Analyze all active trails and generate a priority report. Scores each trail on six factors — Value, Blocking, Urgency, Momentum, Effort, and Risk — using the formula `Priority = (Value + Blocking + Urgency + Momentum) / (Effort + Risk)`. Saves a ranked report to `~/trail/priority-report.md` with scores, reasoning, and summaries.
