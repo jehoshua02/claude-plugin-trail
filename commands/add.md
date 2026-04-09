@@ -38,7 +38,7 @@ EOF
 ```
 
 ```bash
-git -C ~/trail add . && git -C ~/trail commit -m "add: <topic-folder>/<NN>-<slug>"
+git -C ~/trail add <topic-folder>/<NN>-<slug>.md && git -C ~/trail commit -m "add: <topic-folder>/<NN>-<slug>"
 ```
 
 Where `<slug>` is the entry title lowercased with spaces replaced by dashes and non-alphanumeric/dash characters removed, and `<NN>` is the zero-padded sequence number.

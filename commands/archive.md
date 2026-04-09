@@ -26,7 +26,7 @@ allowed-tools: Bash
 
 5. Commit:
    ```bash
-   git -C ~/trail add . && git -C ~/trail commit -m "archive: <topic-folder>"
+   git -C ~/trail add archive/<topic-folder>/ && git -C ~/trail rm -r --cached <topic-folder>/ && git -C ~/trail commit -m "archive: <topic-folder>"
    ```
 
 6. Print the new path to the archived topic folder when done.

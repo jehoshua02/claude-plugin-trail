@@ -49,7 +49,7 @@ allowed-tools: Bash
    cat > ~/trail/daily/<YYYY-MM-DD>.md << 'SUMMARY'
    <the composed summary>
    SUMMARY
-   git -C ~/trail add . && git -C ~/trail commit -m "daily: <YYYY-MM-DD>"
+   git -C ~/trail add daily/<YYYY-MM-DD>.md && git -C ~/trail commit -m "daily: <YYYY-MM-DD>"
    ```
 
    If no trails were touched today, print: "No trails touched today." and skip save and clipboard.

@@ -31,7 +31,7 @@ EOF
 ```
 
 ```bash
-git -C ~/trail add . && git -C ~/trail commit -m "new: <YYYY-MM-DD>-<slug>"
+git -C ~/trail add <YYYY-MM-DD>-<slug>/ && git -C ~/trail commit -m "new: <YYYY-MM-DD>-<slug>"
 ```
 
 Where `<slug>` is the topic name lowercased with spaces replaced by dashes and non-alphanumeric/dash characters removed.

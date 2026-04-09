@@ -43,7 +43,7 @@ allowed-tools: Bash
 
 5. Commit:
    ```bash
-   git -C ~/trail add . && git -C ~/trail commit -m "tldr: <topic-folder>"
+   git -C ~/trail add <topic-folder>/00-tldr.md && git -C ~/trail commit -m "tldr: <topic-folder>"
    ```
 
 6. Print the TLDR to the user.
