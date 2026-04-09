@@ -70,6 +70,23 @@ function showDetail(entry) {
   detailPlaceholder.classList.add('hidden');
   detailContent.classList.remove('hidden');
   detailContent.innerHTML = entry.html;
+  detailContent.querySelectorAll('a').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    if (href.endsWith('.md') && !href.startsWith('http')) {
+      // Internal .md link — navigate to that entry
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const filename = href.split('/').pop();
+        const card = [...document.querySelectorAll('.entry-card')].find(
+          c => c.querySelector('.entry-filename')?.textContent === filename
+        );
+        if (card) card.click();
+      });
+    } else {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+    }
+  });
 }
 
 function filterTrails() {
