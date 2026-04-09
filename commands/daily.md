@@ -43,11 +43,20 @@ allowed-tools: Bash
    - If a `00-trailhead.md` was among today's files, list it as "Started trail"
    - For all other entries, use the `#` heading from the file
 
-6. **Copy to clipboard and print**:
+6. **Save to daily folder** — if there are trails touched today:
    ```bash
-   echo "<summary>" | pbcopy
+   mkdir -p ~/trail/daily
+   cat > ~/trail/daily/<YYYY-MM-DD>.md << 'SUMMARY'
+   <the composed summary>
+   SUMMARY
+   git -C ~/trail add . && git -C ~/trail commit -m "daily: <YYYY-MM-DD>"
+   ```
+
+   If no trails were touched today, print: "No trails touched today." and skip save and clipboard.
+
+7. **Copy to clipboard and print**:
+   ```bash
+   cat ~/trail/daily/<YYYY-MM-DD>.md | pbcopy
    ```
 
    Print the summary to the user and confirm it was copied to clipboard.
-
-   If no trails were touched today, print: "No trails touched today." and skip clipboard.
