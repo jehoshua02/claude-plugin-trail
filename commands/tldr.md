@@ -76,7 +76,7 @@ allowed-tools: Bash
    - **Does not exist** — create it:
      ```bash
      cat > ~/trail/<topic-folder>/00-tldr.md << 'EOF'
-     # TLDR
+     # TLDR: <topic-folder>
 
      ## What
      <one-liner>
