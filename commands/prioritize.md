@@ -21,7 +21,7 @@ allowed-tools: Bash
 3. **Read priority factors from each `00-tldr.md`** — parse the `## Priority Factors` table for the 6 scores (Value, Blocking, Urgency, Momentum, Effort, Risk) and their reasoning. Compute the priority score using:
 
    ```
-   Priority = (Value + Blocking + Urgency + Momentum) / (Effort + Risk)
+   Priority = (Value + Blocking + Urgency) * Momentum / (Effort + Risk)
    ```
 
    Do NOT re-score the factors yourself. Use the scores from `00-tldr.md` as-is. The `trail:tldr` command maintains these scores.
@@ -57,7 +57,7 @@ allowed-tools: Bash
    ...
 
    ## Formula
-   Priority = (Value + Blocking + Urgency + Momentum) / (Effort + Risk)
+   Priority = (Value + Blocking + Urgency) * Momentum / (Effort + Risk)
    Each factor scored 1–5. Higher score = do first.
    ```
 
