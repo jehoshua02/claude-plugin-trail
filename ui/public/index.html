@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trail</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <h1>Trail</h1>
+        <button id="btn-priority" title="Priority Report">&#9733;</button>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="search" placeholder="Filter trails..." />
+      </div>
+      <ul id="trail-list"></ul>
+    </aside>
+    <main id="content">
+      <div id="welcome">
+        <h2>Select a trail</h2>
+        <p>Pick a trail from the sidebar to view its entries.</p>
+      </div>
+      <div id="entries" class="hidden"></div>
+    </main>
+    <aside id="detail-panel">
+      <div id="detail-placeholder">
+        <p>Click an entry to view it here.</p>
+      </div>
+      <div id="detail-content" class="hidden"></div>
+    </aside>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -51,3 +51,23 @@ Get a brief summary of an existing topic. Outputs 3–5 bullet points covering w
 ### trail:prioritize
 
 Analyze all active trails and generate a priority report. Scores each trail on six factors — Value, Blocking, Urgency, Momentum, Effort, and Risk — using the formula `Priority = (Value + Blocking + Urgency + Momentum) / (Effort + Risk)`. Saves a ranked report to `~/trail/priority-report.md` with scores, reasoning, and summaries.
+
+## UI
+
+Readonly web UI for browsing trails. Runs in Docker — nothing installed on host.
+
+### Start
+
+```
+cd ui
+docker compose up --build -d
+```
+
+Open http://localhost:3000
+
+### Stop
+
+```
+cd ui
+docker compose down
+```

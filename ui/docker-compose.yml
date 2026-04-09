@@ -1,0 +1,9 @@
+services:
+  trail-ui:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ~/trail:/data/trail:ro
+    environment:
+      - TRAIL_DIR=/data/trail
