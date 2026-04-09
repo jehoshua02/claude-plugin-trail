@@ -1,0 +1,9 @@
+services:
+  trail-tui:
+    build: .
+    volumes:
+      - ~/trail:/data/trail:ro
+    environment:
+      - TRAIL_DIR=/data/trail
+    stdin_open: true
+    tty: true
