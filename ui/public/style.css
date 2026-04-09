@@ -31,8 +31,8 @@ html, body {
 
 /* Sidebar */
 #sidebar {
-  width: 300px;
-  min-width: 300px;
+  width: 220px;
+  min-width: 220px;
   background: var(--bg-alt);
   border-right: 1px solid var(--border);
   display: flex;
@@ -150,10 +150,10 @@ html, body {
 
 /* Main content */
 #content {
-  flex: 1;
+  width: 200px;
+  min-width: 200px;
   overflow-y: auto;
-  padding: 24px;
-  min-width: 0;
+  padding: 12px;
 }
 
 #welcome {
@@ -206,7 +206,7 @@ html, body {
 
 /* Detail panel */
 #detail-panel {
-  width: 45%;
+  flex: 1;
   min-width: 350px;
   background: var(--bg-alt);
   border-left: 1px solid var(--border);

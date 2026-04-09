@@ -21,7 +21,7 @@ function renderTrailList(list) {
     const li = document.createElement('li');
     if (t.slug === activeSlug) li.classList.add('active');
     li.innerHTML = `
-      <div class="trail-title">${esc(t.title)}</div>
+      <div class="trail-title">${esc(t.slug)}</div>
       <div class="trail-meta">
         <span class="badge badge-active">${esc(t.status)}</span>
         <span class="badge badge-count">${t.entryCount} entries</span>
