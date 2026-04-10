@@ -6,6 +6,33 @@ const detailContent = document.getElementById('detail-content');
 const detailPlaceholder = document.getElementById('detail-placeholder');
 const btnPriority = document.getElementById('btn-priority');
 const tabs = document.querySelectorAll('.tab');
+const themePicker = document.getElementById('theme-picker');
+
+const themes = [
+  { id: 'midnight', name: 'Midnight' },
+  { id: 'nord', name: 'Nord' },
+  { id: 'solarized', name: 'Solarized' },
+  { id: 'dracula', name: 'Dracula' },
+  { id: 'github-dark', name: 'GitHub Dark' },
+  { id: 'catppuccin', name: 'Catppuccin' },
+  { id: 'gruvbox', name: 'Gruvbox' },
+];
+
+themes.forEach(t => {
+  const opt = document.createElement('option');
+  opt.value = t.id;
+  opt.textContent = t.name;
+  themePicker.appendChild(opt);
+});
+
+const savedTheme = localStorage.getItem('trail-theme') || 'midnight';
+document.documentElement.setAttribute('data-theme', savedTheme);
+themePicker.value = savedTheme;
+
+themePicker.addEventListener('change', () => {
+  document.documentElement.setAttribute('data-theme', themePicker.value);
+  localStorage.setItem('trail-theme', themePicker.value);
+});
 
 let trails = [];
 let activeSlug = null;

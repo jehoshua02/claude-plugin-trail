@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-:root {
+:root,
+[data-theme="midnight"] {
   --bg: #1a1a2e;
   --bg-alt: #16213e;
   --bg-card: #0f3460;
@@ -15,6 +16,84 @@
   --border: #2a2a4a;
   --green: #4ecca3;
   --yellow: #f5c542;
+}
+
+[data-theme="nord"] {
+  --bg: #2e3440;
+  --bg-alt: #3b4252;
+  --bg-card: #434c5e;
+  --accent: #88c0d0;
+  --accent-dim: #81a1c1;
+  --text: #eceff4;
+  --text-dim: #d8dee9;
+  --border: #4c566a;
+  --green: #a3be8c;
+  --yellow: #ebcb8b;
+}
+
+[data-theme="solarized"] {
+  --bg: #002b36;
+  --bg-alt: #073642;
+  --bg-card: #094552;
+  --accent: #268bd2;
+  --accent-dim: #2176b8;
+  --text: #eee8d5;
+  --text-dim: #93a1a1;
+  --border: #586e75;
+  --green: #859900;
+  --yellow: #b58900;
+}
+
+[data-theme="dracula"] {
+  --bg: #282a36;
+  --bg-alt: #1e1f29;
+  --bg-card: #44475a;
+  --accent: #bd93f9;
+  --accent-dim: #a77bdb;
+  --text: #f8f8f2;
+  --text-dim: #6272a4;
+  --border: #44475a;
+  --green: #50fa7b;
+  --yellow: #f1fa8c;
+}
+
+[data-theme="github-dark"] {
+  --bg: #0d1117;
+  --bg-alt: #161b22;
+  --bg-card: #21262d;
+  --accent: #58a6ff;
+  --accent-dim: #388bfd;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --border: #30363d;
+  --green: #3fb950;
+  --yellow: #d29922;
+}
+
+[data-theme="catppuccin"] {
+  --bg: #1e1e2e;
+  --bg-alt: #181825;
+  --bg-card: #313244;
+  --accent: #cba6f7;
+  --accent-dim: #b4befe;
+  --text: #cdd6f4;
+  --text-dim: #6c7086;
+  --border: #45475a;
+  --green: #a6e3a1;
+  --yellow: #f9e2af;
+}
+
+[data-theme="gruvbox"] {
+  --bg: #282828;
+  --bg-alt: #1d2021;
+  --bg-card: #3c3836;
+  --accent: #fe8019;
+  --accent-dim: #d65d0e;
+  --text: #ebdbb2;
+  --text-dim: #a89984;
+  --border: #504945;
+  --green: #b8bb26;
+  --yellow: #fabd2f;
 }
 
 html, body {
@@ -54,6 +133,27 @@ html, body {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#theme-picker {
+  background: var(--bg);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 11px;
+  cursor: pointer;
+  outline: none;
+}
+
+#theme-picker:focus {
+  border-color: var(--accent);
 }
 
 #btn-priority {
