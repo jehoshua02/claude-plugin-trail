@@ -14,11 +14,11 @@ Once you have all three, organize the context into a clean, concise paragraph or
 Then create the trailhead by running the following (substituting values inline — do not use shell variables):
 
 ```bash
-mkdir -p ~/trail/<YYYY-MM-DD>-<slug>
+mkdir -p ~/trail/backlog/<YYYY-MM-DD>-<slug>
 ```
 
 ```bash
-cat > ~/trail/<YYYY-MM-DD>-<slug>/00-trailhead.md << 'EOF'
+cat > ~/trail/backlog/<YYYY-MM-DD>-<slug>/00-trailhead.md << 'EOF'
 # <topic-name>
 
 **Date:** <YYYY-MM-DD HH:MM>
@@ -31,7 +31,7 @@ EOF
 ```
 
 ```bash
-git -C ~/trail add <YYYY-MM-DD>-<slug>/ && git -C ~/trail commit -m "new: <YYYY-MM-DD>-<slug>"
+git -C ~/trail add backlog/<YYYY-MM-DD>-<slug>/ && git -C ~/trail commit -m "new: backlog/<YYYY-MM-DD>-<slug>"
 ```
 
 Where `<slug>` is the topic name lowercased with spaces replaced by dashes and non-alphanumeric/dash characters removed.

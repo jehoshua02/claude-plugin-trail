@@ -4,6 +4,7 @@ const entriesDiv = document.getElementById('entries');
 const welcomeDiv = document.getElementById('welcome');
 const detailContent = document.getElementById('detail-content');
 const detailPlaceholder = document.getElementById('detail-placeholder');
+const btnDaily = document.getElementById('btn-daily');
 const btnPriority = document.getElementById('btn-priority');
 const tabs = document.querySelectorAll('.tab');
 const themePicker = document.getElementById('theme-picker');
@@ -38,8 +39,14 @@ let trails = [];
 let activeSlug = null;
 let activeTab = 'active';
 
+const tabEndpoints = {
+  backlog: '/api/trails/backlog',
+  active: '/api/trails/active',
+  archive: '/api/trails/archived',
+};
+
 async function loadTrails() {
-  const endpoint = activeTab === 'active' ? '/api/trails' : '/api/trails/archived';
+  const endpoint = tabEndpoints[activeTab] || '/api/trails/active';
   const res = await fetch(endpoint);
   trails = await res.json();
   renderTrailList(filterTrails());
@@ -61,6 +68,7 @@ function renderTrailList(list) {
 
 async function selectTrail(slug) {
   activeSlug = slug;
+  clearSpecialButtons();
   renderTrailList(filterTrails());
 
   const res = await fetch(`/api/trails/${slug}`);
@@ -132,6 +140,7 @@ tabs.forEach(tab => {
     tab.classList.add('active');
     activeTab = tab.dataset.tab;
     activeSlug = null;
+    clearSpecialButtons();
     searchInput.value = '';
     welcomeDiv.classList.remove('hidden');
     entriesDiv.classList.add('hidden');
@@ -141,8 +150,60 @@ tabs.forEach(tab => {
   });
 });
 
+function clearSpecialButtons() {
+  btnDaily.classList.remove('active');
+  btnPriority.classList.remove('active');
+}
+
+btnDaily.addEventListener('click', async () => {
+  activeSlug = null;
+  clearSpecialButtons();
+  btnDaily.classList.add('active');
+  renderTrailList(filterTrails());
+
+  try {
+    const res = await fetch('/api/daily');
+    const summaries = await res.json();
+    if (!summaries.length) throw new Error('No daily summaries');
+
+    welcomeDiv.classList.add('hidden');
+    entriesDiv.classList.remove('hidden');
+    entriesDiv.innerHTML = '';
+
+    if (summaries.length > 0) {
+      detailPlaceholder.classList.add('hidden');
+      detailContent.classList.remove('hidden');
+      detailContent.innerHTML = summaries[0].html;
+    }
+
+    summaries.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'entry-card';
+      if (i === 0) card.classList.add('active');
+      card.innerHTML = `
+        <h3>${esc(s.date)}</h3>
+        <div class="entry-filename">${esc(s.filename)}</div>
+      `;
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.entry-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        detailPlaceholder.classList.add('hidden');
+        detailContent.classList.remove('hidden');
+        detailContent.innerHTML = s.html;
+      });
+      entriesDiv.appendChild(card);
+    });
+  } catch (e) {
+    detailPlaceholder.classList.remove('hidden');
+    detailContent.classList.add('hidden');
+    detailPlaceholder.innerHTML = '<p>No daily summaries found. Run /trail:daily first.</p>';
+  }
+});
+
 btnPriority.addEventListener('click', async () => {
   activeSlug = null;
+  clearSpecialButtons();
+  btnPriority.classList.add('active');
   renderTrailList(filterTrails());
 
   try {

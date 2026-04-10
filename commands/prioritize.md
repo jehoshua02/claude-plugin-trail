@@ -3,16 +3,21 @@ description: Analyze all active trails and generate a priority report. Usage: /t
 allowed-tools: Bash, Agent
 ---
 
-1. **Scan active trails** — get all active topic folders:
+1. **Scan active trails** — get all topic folders from all locations:
    ```bash
-   ls ~/trail | grep -v README | grep -v "^archive" | grep -v "^daily" | grep -v "^priority-report"
+   # Active (WIP) trails
+   (cd ~/trail && for d in active/*/; do [ -d "$d" ] && echo "$d" | sed 's|/$||'; done 2>/dev/null)
+   # Backlog trails
+   (cd ~/trail && for d in backlog/*/; do [ -d "$d" ] && echo "$d" | sed 's|/$||'; done 2>/dev/null)
+   # Legacy top-level trails
+   (cd ~/trail && ls -d */ 2>/dev/null | grep -v -E '^(backlog|active|archive|daily|\.git)/' | sed 's|/$||')
    ```
 
 2. **Process trails in parallel** — spawn one subagent per trail, all in a single message (parallel). Each subagent:
-   - Run `/trail:tldr <topic-folder>` to ensure the TLDR is fresh
-   - Read `~/trail/<topic-folder>/00-tldr.md`
+   - Run `/trail:tldr <trail-path>` to ensure the TLDR is fresh
+   - Read `~/trail/<trail-path>/00-tldr.md`
    - Parse the `## Priority Factors` table for the 6 scores (Value, Blocking, Urgency, Momentum, Effort, Risk) and their reasoning
-   - Return: topic folder name, all 6 scores with reasoning, and 2-3 sentence TLDR summary
+   - Return: trail path, all 6 scores with reasoning, and 2-3 sentence TLDR summary
 
 3. **Rank trails** — collect results from all subagents. Compute priority score for each:
 
@@ -32,7 +37,7 @@ allowed-tools: Bash, Agent
    ## Rankings
 
    ### 1. <Topic Name> — Score: <X.XX>
-   **Folder:** <topic-folder>
+   **Folder:** <trail-path>
 
    | Factor   | Score | Reasoning |
    |----------|-------|-----------|

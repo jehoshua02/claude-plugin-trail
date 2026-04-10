@@ -8,15 +8,16 @@ allowed-tools: Bash
    git -C ~/trail log --since="midnight" --name-only --pretty=format: | sort -u | grep '\.md$' | grep -v '^$'
    ```
 
-2. **Group by topic folder** — extract the parent folder from each file path. Deduplicate to get a list of topic folders touched today. Include both active (`<topic>/`) and archived (`archive/<topic>/`) paths.
+2. **Group by topic folder** — extract the parent folder from each file path. Deduplicate to get a list of topic folders touched today. Paths may be:
+   - `active/<topic>/<file>` — active trail
+   - `backlog/<topic>/<file>` — backlog trail
+   - `archive/<topic>/<file>` — archived trail
+   - `<topic>/<file>` — legacy top-level trail
 
-3. **Read trailheads** — for each topic folder, read `00-trailhead.md` to get:
+3. **Read trailheads** — for each topic folder, read `00-trailhead.md` at the appropriate path to get:
    - Topic name (the `#` heading)
    - Ticket
    - Status (active/archived)
-
-   For archived topics, the path is `~/trail/archive/<topic>/00-trailhead.md`.
-   For active topics, the path is `~/trail/<topic>/00-trailhead.md`.
 
 4. **Read today's entries** — for each topic, read only the files that appeared in the git log output. Extract the `#` heading from each as the entry title.
 
@@ -25,11 +26,11 @@ allowed-tools: Bash
    ```
    *Daily Trail Summary — <YYYY-MM-DD>*
 
-   *<Topic Name>* (<ticket>) [<status>]
+   *<Topic Name>* (<ticket>) [<status>] [<location>]
    - <Entry title>
    - <Entry title>
 
-   *<Another Topic>* (<ticket>) [<status>]
+   *<Another Topic>* (<ticket>) [<status>] [<location>]
    - <Entry title>
    ```
 
@@ -38,6 +39,7 @@ allowed-tools: Bash
    - Use `-` for bullet entries
    - Show ticket if not "none", omit parentheses if no ticket
    - Show status in square brackets
+   - Show location (active/backlog/archive/legacy) in square brackets
    - One blank line between topics
    - If a `00-tldr.md` was among today's files, list it as "Updated TLDR"
    - If a `00-trailhead.md` was among today's files, list it as "Started trail"
