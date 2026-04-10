@@ -56,7 +56,25 @@ app.get('/api/trails/archived', (req, res) => {
     const entries = fs.readdirSync(archiveDir, { withFileTypes: true });
     const trails = entries
       .filter(e => e.isDirectory())
-      .map(e => ({ slug: e.name, archived: true }))
+      .map(e => {
+        const trailheadPath = path.join(archiveDir, e.name, '00-trailhead.md');
+        let title = e.name;
+        let date = '';
+
+        if (fs.existsSync(trailheadPath)) {
+          const content = fs.readFileSync(trailheadPath, 'utf-8');
+          const titleMatch = content.match(/^#\s+(.+)$/m);
+          if (titleMatch) title = titleMatch[1];
+          const dateMatch = content.match(/\*\*Date:\*\*\s*(.+)/);
+          if (dateMatch) date = dateMatch[1].trim();
+        }
+
+        const files = fs.readdirSync(path.join(archiveDir, e.name))
+          .filter(f => f.endsWith('.md'))
+          .sort();
+
+        return { slug: e.name, title, date, status: 'archived', entryCount: files.length, archived: true };
+      })
       .sort((a, b) => b.slug.localeCompare(a.slug));
 
     res.json(trails);
@@ -68,7 +86,10 @@ app.get('/api/trails/archived', (req, res) => {
 // Get all entries for a trail
 app.get('/api/trails/:slug', (req, res) => {
   try {
-    const trailDir = path.join(TRAIL_DIR, req.params.slug);
+    let trailDir = path.join(TRAIL_DIR, req.params.slug);
+    if (!fs.existsSync(trailDir)) {
+      trailDir = path.join(TRAIL_DIR, 'archive', req.params.slug);
+    }
     if (!fs.existsSync(trailDir)) return res.status(404).json({ error: 'Trail not found' });
 
     const files = fs.readdirSync(trailDir)

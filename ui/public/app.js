@@ -5,14 +5,17 @@ const welcomeDiv = document.getElementById('welcome');
 const detailContent = document.getElementById('detail-content');
 const detailPlaceholder = document.getElementById('detail-placeholder');
 const btnPriority = document.getElementById('btn-priority');
+const tabs = document.querySelectorAll('.tab');
 
 let trails = [];
 let activeSlug = null;
+let activeTab = 'active';
 
 async function loadTrails() {
-  const res = await fetch('/api/trails');
+  const endpoint = activeTab === 'active' ? '/api/trails' : '/api/trails/archived';
+  const res = await fetch(endpoint);
   trails = await res.json();
-  renderTrailList(trails);
+  renderTrailList(filterTrails());
 }
 
 function renderTrailList(list) {
@@ -21,8 +24,8 @@ function renderTrailList(list) {
     const li = document.createElement('li');
     if (t.slug === activeSlug) li.classList.add('active');
     li.innerHTML = `
-      <div class="trail-title">${esc(t.title)}</div>
-      <div class="trail-slug">${esc(t.slug)}</div>
+      <div class="trail-title" title="${esc(t.title)}">${esc(t.title)}</div>
+      <div class="trail-slug" title="${esc(t.slug)}">${esc(t.slug)}</div>
     `;
     li.addEventListener('click', () => selectTrail(t.slug));
     trailList.appendChild(li);
@@ -40,7 +43,6 @@ async function selectTrail(slug) {
   entriesDiv.classList.remove('hidden');
   entriesDiv.innerHTML = '';
 
-  // Show detail of first entry by default
   if (entries.length > 0) {
     showDetail(entries[0]);
   }
@@ -69,7 +71,6 @@ function showDetail(entry) {
   detailContent.querySelectorAll('a').forEach(a => {
     const href = a.getAttribute('href') || '';
     if (href.endsWith('.md') && !href.startsWith('http')) {
-      // Internal .md link — navigate to that entry
       a.addEventListener('click', e => {
         e.preventDefault();
         const filename = href.split('/').pop();
@@ -96,6 +97,21 @@ function filterTrails() {
 
 searchInput.addEventListener('input', () => {
   renderTrailList(filterTrails());
+});
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeTab = tab.dataset.tab;
+    activeSlug = null;
+    searchInput.value = '';
+    welcomeDiv.classList.remove('hidden');
+    entriesDiv.classList.add('hidden');
+    detailContent.classList.add('hidden');
+    detailPlaceholder.classList.remove('hidden');
+    loadTrails();
+  });
 });
 
 btnPriority.addEventListener('click', async () => {
