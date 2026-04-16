@@ -93,8 +93,11 @@ allowed-tools: Bash
 
    - **Does not exist** — create it:
      ```bash
-     cat > ~/trail/<trail-path>/00-tldr.md << 'EOF'
+     TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
+     cat > ~/trail/<trail-path>/00-tldr.md << EOF
      # TLDR: <topic-folder>
+
+     **Last Updated:** $TIMESTAMP
 
      ## What
      <one-liner>
@@ -122,7 +125,7 @@ allowed-tools: Bash
      EOF
      ```
 
-   - **Exists** — read it and check that every file in the folder is mentioned. If any file is missing, update the bullets to include it. Always re-score the priority factors based on current trail content, then overwrite the file.
+   - **Exists** — read it and check that every file in the folder is mentioned. If any file is missing, update the bullets to include it. Always re-score the priority factors based on current trail content, update `**Last Updated:**` with a fresh `TIMESTAMP=$(date '+%Y-%m-%d %H:%M')`, then overwrite the file.
 
 8. Commit:
    ```bash

@@ -17,11 +17,14 @@ Then create the trailhead by running the following (substituting values inline â
 mkdir -p ~/trail/backlog/<YYYY-MM-DD>-<slug>
 ```
 
+Generate the timestamp programmatically:
+
 ```bash
-cat > ~/trail/backlog/<YYYY-MM-DD>-<slug>/00-trailhead.md << 'EOF'
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
+cat > ~/trail/backlog/<YYYY-MM-DD>-<slug>/00-trailhead.md << EOF
 # <topic-name>
 
-**Date:** <YYYY-MM-DD HH:MM>
+**Created:** $TIMESTAMP
 **Ticket:** <ticket or 'none'>
 **Status:** active
 
