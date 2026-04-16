@@ -18,9 +18,11 @@ allowed-tools: Bash
 
 3. Run the `/trail:tldr` command for the trail to ensure the TLDR is up to date before archiving.
 
-4. Update the trailhead status to `archived`:
+4. Update the trailhead status to `archived` and stamp the archive time:
    ```bash
    sed -i '' 's/^\*\*Status:\*\* .*/\*\*Status:\*\* archived/' ~/trail/<trail-path>/00-trailhead.md
+   TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
+   printf '\n**Archived:** %s\n' "$TIMESTAMP" >> ~/trail/<trail-path>/00-trailhead.md
    ```
 
 5. Move the topic folder to the archive:

@@ -6,7 +6,7 @@ import argparse
 import os
 import subprocess
 import sys
-from datetime import date
+from datetime import datetime
 
 TRAIL_DIR = os.path.join(os.path.expanduser("~"), "trail")
 
@@ -25,7 +25,8 @@ args = parser.parse_args()
 
 import re
 slug = re.sub(r"[^a-z0-9-]", "", args.topic.lower().replace(" ", "-"))
-today = date.today().strftime("%Y-%m-%d")
+today = datetime.now().strftime("%Y-%m-%d")
+now = datetime.now().strftime("%Y-%m-%d %H:%M")
 folder = f"{today}-{slug}"
 topic_dir = os.path.join(TRAIL_DIR, folder)
 
@@ -33,7 +34,7 @@ os.makedirs(topic_dir, exist_ok=True)
 
 with open(os.path.join(topic_dir, "00-trailhead.md"), "w") as f:
     f.write(f"# {args.topic}\n\n")
-    f.write(f"**Date:** {today}\n")
+    f.write(f"**Created:** {now}\n")
     f.write(f"**Ticket:** {args.ticket}\n")
     f.write(f"**Status:** active\n\n")
     f.write(f"## Context\n")

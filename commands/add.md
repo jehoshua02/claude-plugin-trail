@@ -34,10 +34,11 @@ The files are named like `00-trailhead.md`, `01-something.md`, etc. The next ent
 Then create the entry:
 
 ```bash
-cat > ~/trail/<trail-path>/<NN>-<slug>.md << 'EOF'
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
+cat > ~/trail/<trail-path>/<NN>-<slug>.md << EOF
 # <entry-title>
 
-**Date:** <YYYY-MM-DD HH:MM>
+**Created:** $TIMESTAMP
 
 <organized content>
 EOF
@@ -48,5 +49,7 @@ git -C ~/trail add <trail-path>/<NN>-<slug>.md && git -C ~/trail commit -m "add:
 ```
 
 Where `<slug>` is the entry title lowercased with spaces replaced by dashes and non-alphanumeric/dash characters removed, and `<NN>` is the zero-padded sequence number.
+
+**Edit log for modifications:** When modifying an existing trail file (not creating a new one), append to the `## Edit Log` section at the bottom of that file. If the section doesn't exist, create it. Each entry: `- <timestamp> — <brief description>`. Generate the timestamp with `TIMESTAMP=$(date '+%Y-%m-%d %H:%M')`.
 
 Print the path to the new entry file when done.
